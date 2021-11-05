@@ -51,38 +51,6 @@ h2{
   .spacing;
 }
 
-/*  =========================================================
-	Parametric Mixins
-========================================================= */
-
-.background-color(@bg-color) {
-  background-color: @bg-color;  
-}
-.background-color(@bg-color: @primary-color) { /* fallback */
-  background-color: @bg-color;  
-}
-
-.informations{
-  .spacing
-}
-
-.informationsContainer{
-  .textStyles;
-  color: #fff;
-  display: flex;
-  gap: 30px;
-  
-  p{
-    .background-color;
-    padding: 30px;
-    border-radius: 30px;
-  }
-
-  p:last-of-type{
-    .background-color(@secondary-color);
-  }
-}
-
 
 /*  =========================================================
 	Nesting
@@ -90,7 +58,7 @@ h2{
 
 .buttonStyles(@color){
   background: @color;
-  box-shadow: 0 6px 0 darken(@color, 9%);
+  box-shadow: 0 6px 0 darken(@color, 9%); /* function: darken */ 
 
   &:active{ /* selectors in mixins */ 
     box-shadow: 0 2px 0 darken(@color, 9%);
@@ -120,5 +88,46 @@ h2{
     &.buttonTwo{
       .buttonStyles(@button-color-orange);
     }
+  }
+}
+
+/*  =========================================================
+	Parametric Mixins
+========================================================= */
+
+.background-color(@bg-color) {
+  background-color: @bg-color;  
+}
+.background-color(@bg-color: @primary-color) { /* fallback */
+  background-color: @bg-color;  
+}
+
+.informations{
+  .spacing
+}
+
+.function(@a, @b){ /* mixin function */
+  @result: ((@a + @b) / 2);
+}
+
+.informationsContainer{ /* nesting */ 
+  .textStyles;
+  color: #fff;
+  display: flex;
+  gap: 30px;
+  @media (max-width: 1100px) {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  
+  p{
+    .background-color;
+    padding: 40px;
+    border-radius: 30px;
+  }
+
+  p:last-of-type{
+    .background-color(@secondary-color); /* fallback overwritten */ 
+    padding: .function(20px, 10px)[@result];/* function "(20px+10px) / 2" */
   }
 }
