@@ -1,0 +1,92 @@
+/*  =========================================================
+	Variables
+========================================================= */
+@primary-color: #64a6bd;
+@secondary-color: #ada7c9;
+@tertiary-color: #f4cae0;
+
+@button-color-green: #65BD9A;
+@button-color-orange: #BD7D65;
+
+/*  =========================================================
+	Mixin
+========================================================= */
+
+.headlineStyles{
+  text-decoration: underline @tertiary-color;
+  color: @primary-color;
+  font-family: 'Zen Kurenaido';
+}
+
+.textStyles{
+  font-family: 'Quattrocento Sans';
+  font-weight: 400;
+  color: @secondary-color;
+  font-size: 25px;
+}
+
+.spacing{
+  margin: 0 200px;
+}
+
+.separationStyles{
+  border-bottom: 3px solid @tertiary-color;
+  width: 50%;
+}
+
+
+h1{
+  font-size: 60px;
+  text-align: center;
+  .headlineStyles(); /* parentheses */ 
+}
+
+.subHeadline{
+  .textStyles;
+  .spacing;
+}
+
+
+
+/*  =========================================================
+	Nesting
+========================================================= */
+
+.buttonStyles(@color){
+  background: @color;
+  box-shadow: 0 6px 0 darken(@color, 9%);
+
+  &:active{ /* selectors in mixins */ 
+    box-shadow: 0 2px 0 darken(@color, 9%);
+    position: relative;
+    top: 2px;
+  }
+
+  &:hover{
+    background: darken(@color, 3%);
+  }
+}
+
+.buttonContainer{
+  .spacing;
+  h2{
+    .headlineStyles;
+    font-size: 40px;
+  }
+  a{
+    font-family: 'Quattrocento Sans';
+    font-size: 25px;
+    padding: 13px 15px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    
+    &.buttonOne{
+      .buttonStyles(@button-color-green);
+      margin-right: 20px;
+    }
+    &.buttonTwo{
+      .buttonStyles(@button-color-orange);
+    }
+  }
+}
