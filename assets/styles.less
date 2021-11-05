@@ -14,7 +14,7 @@
 
 .headlineStyles{
   text-decoration: underline @tertiary-color;
-  color: @primary-color;
+  color: @primary-color; /* variable */ 
   font-family: 'Zen Kurenaido';
 }
 
@@ -41,11 +41,47 @@ h1{
   .headlineStyles(); /* parentheses */ 
 }
 
-.subHeadline{
+h2{
+  .headlineStyles;
+  font-size: 40px;
+}
+
+.text{
   .textStyles;
   .spacing;
 }
 
+/*  =========================================================
+	Parametric Mixins
+========================================================= */
+
+.background-color(@bg-color) {
+  background-color: @bg-color;  
+}
+.background-color(@bg-color: @primary-color) { /* fallback */
+  background-color: @bg-color;  
+}
+
+.informations{
+  .spacing
+}
+
+.informationsContainer{
+  .textStyles;
+  color: #fff;
+  display: flex;
+  gap: 30px;
+  
+  p{
+    .background-color;
+    padding: 30px;
+    border-radius: 30px;
+  }
+
+  p:last-of-type{
+    .background-color(@secondary-color);
+  }
+}
 
 
 /*  =========================================================
@@ -69,10 +105,6 @@ h1{
 
 .buttonContainer{
   .spacing;
-  h2{
-    .headlineStyles;
-    font-size: 40px;
-  }
   a{
     font-family: 'Quattrocento Sans';
     font-size: 25px;
